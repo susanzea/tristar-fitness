@@ -101,7 +101,13 @@ def create_workout_session():
     db.session.commit()
     return format_workout_session(workout_session)
 
-
+@app.route("/workout-session", methods = ["GET"])
+def get_workout_sessions():
+    sessions = WorkoutSession.query.order_by(WorkoutSession.workout_date.asc()).all()
+    sessions_list = []
+    for session in sessions:
+        sessions_list.append(format_workout_session(session))
+    return {'workout_sessions': sessions_list, 'total': len(sessions_list)}
 
 
 
