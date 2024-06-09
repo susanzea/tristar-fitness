@@ -26,7 +26,7 @@ def format_workout_type(workout_type):
         "name": workout_type.name,
         "created_at": workout_type.created_at,
     }
-
+# comment
 @app.route("/workout-type", methods = ['POST'])
 def create_workout_type():
     name = request.json['name']
