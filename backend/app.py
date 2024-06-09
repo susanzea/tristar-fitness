@@ -20,7 +20,7 @@ class WorkoutType(db.Model):
     workout_sessions = db.relationship('WorkoutSession', backref='workout_type')
 
     def __repr__(self):
-        return f"Event: {self.name}"
+        return f"Workout type: {self.name}"
     
     def __init__(self, name):
         self.name = name
@@ -105,20 +105,16 @@ def get_workout_sessions():
     type = request.args.get('type')
 
     # if week param exists, filter for only sessions during that week
-
-    # if type param exists, filter for only sessions of that type
-
-
-    # sessions = WorkoutSession.query.order_by(WorkoutSession.workout_date.asc()).all()
     query = WorkoutSession.query
     if (week_start):
         # year, month, day = week.split('-')
-        week_end = datetime.strptime(week_start.replace('-', '/'), '%Y/%m/%d') + timedelta(days=6)
-        print(week_start)
-        print(week_end)
+        week_end = datetime.strptime(week_start, '%Y-%m-%d') + timedelta(days=7)
         query = query.filter(WorkoutSession.workout_date.between(week_start, week_end))
-    # if (type):
-    #     query = query.filter()
+    
+    # if type param exists, filter for only sessions of that type
+    if (type):
+        workout_type_id = WorkoutType.query.filter(WorkoutType.name==type).first().id
+        query = query.filter(WorkoutSession.workout_type_id == workout_type_id)
 
     sessions = query.order_by(WorkoutSession.workout_date.asc()).all()
 
