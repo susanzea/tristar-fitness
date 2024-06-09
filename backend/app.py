@@ -40,6 +40,7 @@ class WorkoutSession(db.Model):
     # a session can be assign to one workout type
     workout_type_id = db.Column(db.Integer, db.ForeignKey('workout_type.id'), nullable=False)
     duration_min = db.Column(db.Integer, nullable=False)
+    created_at = db.Column(db.DateTime, nullable=False, default=datetime.now(timezone.utc))
 
     def __repr__(self):
         return f"WorkoutSession: {self.id}"
@@ -56,7 +57,7 @@ def format_workout_session(workout_session):
     return {
         "id": workout_session.id,
         "workout_date": workout_session.workout_date,
-        "workout_type": workout_session.workout_type,
+        "workout_type_id": workout_session.workout_type_id,
         "duration_min": workout_session.duration_min,
         "created_at": workout_session.created_at,
     }
@@ -92,13 +93,13 @@ def get_workout_types():
 @app.route("/workout-session", methods = ['POST'])
 def create_workout_session():
     print(request)
-    # workout_date = request.json['workout_date']
-    # workout_type = request.json['workout_type']
-    # duration_min = request.json['duration_min']
-    # workout_session = WorkoutType(workout_type, workout_date, duration_min)
-    # db.session.add(workout_session)
-    # db.session.commit()
-    # return format_workout_type(workout_session)
+    workout_date = request.json['workout_date']
+    workout_type_id = request.json['workout_type_id']
+    duration_min = request.json['duration_min']
+    workout_session = WorkoutSession(workout_date, workout_type_id, duration_min)
+    db.session.add(workout_session)
+    db.session.commit()
+    return format_workout_session(workout_session)
 
 
 
