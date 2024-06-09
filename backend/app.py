@@ -1,7 +1,7 @@
 from flask import Flask, request
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
-from datetime import datetime, timezone
+from datetime import datetime, timezone, timedelta
 
 app = Flask(__name__)
 app.app_context().push()
@@ -43,10 +43,9 @@ class WorkoutSession(db.Model):
     created_at = db.Column(db.DateTime, nullable=False, default=datetime.now(timezone.utc))
 
     def __repr__(self):
-        return f"WorkoutSession: {self.id}"
+        return f"<WorkoutSession: {self.id}>"
     
     def __init__(self, workout_date, workout_type_id, duration_min):
-        print(self)
         self.workout_date = workout_date
         self.workout_type_id = workout_type_id
         self.duration_min = duration_min
@@ -92,7 +91,6 @@ def get_workout_types():
 #sessions
 @app.route("/workout-session", methods = ['POST'])
 def create_workout_session():
-    print(request)
     workout_date = request.json['workout_date']
     workout_type_id = request.json['workout_type_id']
     duration_min = request.json['duration_min']
@@ -103,10 +101,31 @@ def create_workout_session():
 
 @app.route("/workout-session", methods = ["GET"])
 def get_workout_sessions():
-    sessions = WorkoutSession.query.order_by(WorkoutSession.workout_date.asc()).all()
+    week_start = request.args.get('week')
+    type = request.args.get('type')
+
+    # if week param exists, filter for only sessions during that week
+
+    # if type param exists, filter for only sessions of that type
+
+
+    # sessions = WorkoutSession.query.order_by(WorkoutSession.workout_date.asc()).all()
+    query = WorkoutSession.query
+    if (week_start):
+        # year, month, day = week.split('-')
+        week_end = datetime.strptime(week_start.replace('-', '/'), '%Y/%m/%d') + timedelta(days=6)
+        print(week_start)
+        print(week_end)
+        query = query.filter(WorkoutSession.workout_date.between(week_start, week_end))
+    # if (type):
+    #     query = query.filter()
+
+    sessions = query.order_by(WorkoutSession.workout_date.asc()).all()
+
     sessions_list = []
     for session in sessions:
         sessions_list.append(format_workout_session(session))
+
     return {'workout_sessions': sessions_list, 'total': len(sessions_list)}
 
 
