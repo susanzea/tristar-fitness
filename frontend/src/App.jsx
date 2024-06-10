@@ -1,6 +1,6 @@
 import "./styles/style.scss";
 import "./styles/_base.scss";
-import Navbar from "./components/Navbar";
+import Navbar from "./components/Navbar/Navbar";
 
 function App() {
   return (
