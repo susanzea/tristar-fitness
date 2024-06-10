@@ -14,7 +14,7 @@
 }
 
 @mixin accent-text() {
-  // color: $gun-powder;
+  // ! add color
   @include font-size(14px);
   letter-spacing: 1px;
 }
