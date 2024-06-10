@@ -1,0 +1,14 @@
+@import "../../mixins";
+
+#week-navigator {
+  display: flex;
+  justify-content: space-between;
+  @include font-size(22px);
+  width: 22rem;
+  white-space: nowrap;
+
+  .icon-button {
+    background-color: transparent;
+    border: none;
+  }
+}
