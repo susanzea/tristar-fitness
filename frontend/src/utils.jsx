@@ -1,6 +1,4 @@
 export const getWeekday = (weekdayIdx, d = new Date()) => {
-  console.log(`d: ${d}`)
-  debugger;
   d = new Date(d);
   const day = d.getDay(),
     diff = d.getDate() - day + (day == 0 ? 6 : weekdayIdx); // adjust when day is sunday
@@ -10,4 +8,11 @@ export const getWeekday = (weekdayIdx, d = new Date()) => {
 
 export const formatDate = (dt) => {
   return dt.toDateString().split(" ").slice(1).join(" ");
+};
+
+export const addOrSubWeek = (dateObj, op) => {
+  const copy = new Date (dateObj);
+  copy.setDate(op === "-" ? copy.getDate() - 7 : copy.getDate() + 7);
+  
+  return copy;
 };
