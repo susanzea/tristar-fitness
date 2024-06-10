@@ -4,7 +4,6 @@ import { getWeekday, formatDate, addOrSubWeek } from "../../utils";
 import "../../styles/components/Navbar/_WeekNavigator.scss";
 
 const WeekNavigator = ({ weekStart, setWeekStart }) => {
-  console.log(`weekStart from WeekNavigator: ${weekStart}`);
   const formattedWeekStartDate = formatDate(weekStart);
   const weekEnd = getWeekday(6, weekStart);
   const formattedWeekEndDate = formatDate(weekEnd);
