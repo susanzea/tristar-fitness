@@ -1,9 +1,11 @@
-import './styles/_main.scss';
+import "./styles/style.scss";
 
 function App() {
   return (
-    <div>
-      <h1>ello mate</h1>
+    <div className='page'>
+      <div className='content-container'>
+        <h1>ello mate</h1>
+      </div>
     </div>
   );
 }
