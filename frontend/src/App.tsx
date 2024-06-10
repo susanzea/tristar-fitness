@@ -1,9 +1,13 @@
-import './styles/_main.scss';
+import "./styles/style.scss";
+import "./styles/_base.scss";
+
 
 function App() {
   return (
-    <div>
-      <h1>ello mate</h1>
+    <div className='page cabin'>
+      <div className='content-container'>
+        <h1>ello mate</h1>
+      </div>
     </div>
   );
 }

@@ -1,0 +1,53 @@
+@import "colors";
+@import "breakpoints";
+@import "variables";
+@import "functions";
+@import "mixins";
+
+.uppercase {
+  text-transform: uppercase;
+}
+
+.bold {
+  font-weight: weight(bold);
+}
+
+h1,
+.h1 {
+  @include font-size(36px);
+  line-height: 1.5;
+}
+
+h2,
+.h2 {
+  @include font-size(24px);
+  font-weight: weight(bold);
+  letter-spacing: 1px;
+  line-height: 1.5;
+  // ! add color
+
+  @media (max-width: $breakpoint-sm) {
+    @include font-size(22px);
+  }
+}
+
+h3,
+.h3 {
+  @include font-size(20px);
+  line-height: 1.25;
+  // ! add color
+
+  @media (max-width: $breakpoint-xs) {
+    @include font-size(18px);
+  }
+}
+
+p {
+  font-weight: weight(light);
+  letter-spacing: 1px;
+  line-height: 1.4;
+
+  @media (max-width: $breakpoint-xs) {
+    @include font-size(14px);
+  }
+}
