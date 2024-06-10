@@ -9,12 +9,8 @@ function App() {
 
   return (
     <div className='page cabin'>
-      <Navbar
-        weekStart={weekStart}
-        setWeekStart={setWeekStart}
-      />
+      <Navbar weekStart={weekStart} setWeekStart={setWeekStart} />
       <div className='content-container'>
-        <h1>ello mate</h1>
       </div>
     </div>
   );
