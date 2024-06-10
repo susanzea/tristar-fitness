@@ -19,7 +19,7 @@ class WorkoutType(db.Model):
     workout_sessions = db.relationship('WorkoutSession', backref='workout_type')
 
     def __repr__(self):
-        return f"Workout type: {self.name}"
+        return f"<Workout type: {self.name}>"
     
     def __init__(self, name):
         self.name = name
@@ -30,7 +30,6 @@ class WorkoutSession(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     workout_date = db.Column(db.DateTime, nullable=False, default=datetime.now(timezone.utc))
-    # a session can be assign to one workout type
     workout_type_id = db.Column(db.Integer, db.ForeignKey('workout_type.id'), nullable=False)
     duration_min = db.Column(db.Integer, nullable=False)
     created_at = db.Column(db.DateTime, nullable=False, default=datetime.now(timezone.utc))
