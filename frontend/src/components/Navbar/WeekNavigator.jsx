@@ -1,35 +1,25 @@
 // import IconButton from "../Shared Components/IconButton.jsx";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAnglesLeft, faAnglesRight } from "@fortawesome/free-solid-svg-icons";
-import '../../styles/components/Navbar/_WeekNavigator.scss'
+import { getWeekday, formatDate } from "../../utils";
+import "../../styles/components/Navbar/_WeekNavigator.scss";
 
-const WeekNavigator = () => {
-  const getWeekday = (weekdayIdx, d = new Date()) => {
-    d = new Date(d);
-    const day = d.getDay(),
-      diff = d.getDate() - day + (day == 0 ? -6 : weekdayIdx); // adjust when day is sunday
-
-    return new Date(d.setDate(diff));
-  };
-
-  const SundayDateString = getWeekday(0)
-    .toDateString()
-    .split(" ")
-    .slice(1)
-    .join(" ");
-
-  const SaturdayDateString = getWeekday(6)
-    .toDateString()
-    .split(" ")
-    .slice(1)
-    .join(" ");
+const WeekNavigator = ({ weekStart }) => {
+  const formattedWeekStartDate = formatDate(weekStart);
+  debugger;
+  const weekEnd = getWeekday(6, weekStart)
+  console.log(`weekEnd: ${weekEnd}`);
+  const formattedWeekEndDate = formatDate(weekEnd);
+  console.log(`formattedWeekEndDate: ${formattedWeekEndDate}`);
+  
+  debugger;
 
   return (
     <div id='week-navigator'>
       <button className='icon-button'>
         <FontAwesomeIcon icon={faAnglesLeft} style={{ color: "#ffffff" }} />
       </button>
-      &nbsp;{SundayDateString} - {SaturdayDateString}&nbsp;
+      &nbsp;{formattedWeekStartDate} - {formattedWeekEndDate}&nbsp;
       <button className='icon-button'>
         <FontAwesomeIcon icon={faAnglesRight} style={{ color: "#ffffff" }} />
       </button>
