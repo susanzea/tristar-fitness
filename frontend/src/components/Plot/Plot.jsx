@@ -1,16 +1,23 @@
 import { useState, useEffect } from "react";
 import { BarChart, barElementClasses } from "@mui/x-charts/BarChart";
 import { axisClasses } from "@mui/x-charts/ChartsAxis";
+import SelectMenu from "../Shared Components/Select";
 import Card from "../Shared Components/Card";
 import "../../styles/components/Plot/_Plot.scss";
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const PlotSection = ({ weekStart }) => {
-  const [workoutTypes, setWorkoutTypes] = useState([]);
+  const [workoutTypeOptions, setWorkoutTypeOptions] = useState([
+    {
+      value: "",
+      label: "",
+    },
+  ]);
   const [plotData, setPlotData] = useState([]);
 
   useEffect(() => {
     // fetch workout types and set
-    setWorkoutTypes([
+    const workoutTypes = [
       {
         created_at: "Sat, 08 Jun 2024 21:48:28 GMT",
         id: 2,
@@ -36,10 +43,14 @@ const PlotSection = ({ weekStart }) => {
         id: 5,
         name: "yoga",
       },
-    ]);
-    // fetch workout sessions and set
-    // loop for week
-    debugger;
+    ];
+
+    const options = workoutTypes.map((t) => {
+      return { value: t.id, label: t.name };
+    });
+    console.log(options);
+
+    setWorkoutTypeOptions([{ value: "", label: "all" }, ...options]);
 
     const totalWorkoutDurationPerWeekday = Object.values({
       "2024-06-02 00:00:00": 0,
@@ -51,14 +62,15 @@ const PlotSection = ({ weekStart }) => {
       "2024-06-08 00:00:00": 0,
     });
 
-    debugger;
     setPlotData(totalWorkoutDurationPerWeekday);
   }, []);
 
   return (
     <Card>
       <div id='plot-container'>
-        <div>hi</div>
+        <div>
+          <SelectMenu options={workoutTypeOptions} />
+        </div>
         <BarChart
           series={[{ data: plotData, color: "#3245e5" }]}
           height={290}
@@ -83,7 +95,7 @@ const PlotSection = ({ weekStart }) => {
                 fill: "#FFFFFF",
               },
             },
-            "& .MuiChartsAxis-label": {
+            "& .css-1k2u9zb-MuiChartsAxis-root .MuiChartsAxis-label": {
               strokeWidth: "0.4",
               fill: "#FFFFFF",
             },

@@ -1,5 +1,18 @@
 #plot-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+
+  .select-menu {
     display: flex;
-    flex-direction: column;
-    width: 100%;
+    justify-content: end;
+
+    label {
+      color: white;
+    }
+
+    .MuiSelect-select {
+      color: white;
+    }
+  }
 }
