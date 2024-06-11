@@ -9,21 +9,15 @@ import AddSessionModal from "./AddSessionModal";
 import Form from "./Form";
 import "../../styles/components/SessionsIndex/_SessionsIndex.scss";
 
-const SessionsIndex = ({ weekStart, workoutTypes, workoutTypeOptions }) => {
-  const [sessions, setSessions] = useState([]);
+const SessionsIndex = ({
+  weekStart,
+  workoutTypes,
+  workoutTypeOptions,
+  fetchSessions,
+  workoutSessionsData,
+}) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const fetchSessions = async () => {
-    const sessions = await getWorkoutSessions({
-      week: weekStart.toISOString().split("T")[0],
-    });
-
-    setSessions(sessions.workout_sessions);
-  };
-
-  useEffect(() => {
-    fetchSessions();
-  }, [weekStart]);
 
   return (
     <>
@@ -39,7 +33,11 @@ const SessionsIndex = ({ weekStart, workoutTypes, workoutTypeOptions }) => {
                 style={{ color: "#ffffff", height: "30px" }}
               />
             </button>
-            <Form workoutTypeOptions={workoutTypeOptions} />
+            <Form
+              workoutTypeOptions={workoutTypeOptions}
+              fetchSessions={fetchSessions}
+              setIsModalOpen={setIsModalOpen}
+            />
           </div>
         </Card>
       </AddSessionModal>
@@ -54,7 +52,8 @@ const SessionsIndex = ({ weekStart, workoutTypes, workoutTypeOptions }) => {
           <span>&nbsp;&nbsp;Add workout</span>
         </button>
         <div className='sessions-index-container'>
-          {sessions.map((s, i) => {
+          {workoutSessionsData?.workout_sessions.map((s, i) => {
+            console.log(s);
             return <Row key={i} session={s} workoutTypes={workoutTypes} />;
           })}
         </div>

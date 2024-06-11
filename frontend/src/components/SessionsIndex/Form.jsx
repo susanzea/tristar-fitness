@@ -1,17 +1,23 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { useForm } from "react-hook-form";
 import { createWorkoutSession } from "../../utils/apiWorkoutSession";
 import "../../styles/components/SessionsIndex/_Form.scss";
 
-const Form = ({ workoutTypeOptions }) => {
+const Form = ({ workoutTypeOptions, fetchSessions, setIsModalOpen }) => {
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const onSubmit = (data) => {
-    console.log(data)
-    createWorkoutSession({workout_type_id: data.workout, duration_min: data.duration, workout_date: data.date })
+  const onSubmit = async (data) => {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const session = await createWorkoutSession({
+      workout_type_id: data.workout,
+      duration_min: data.duration,
+      workout_date: data.date,
+    });
+
+    fetchSessions();
+    setIsModalOpen(false);
   };
 
   return (
@@ -52,7 +58,6 @@ const Form = ({ workoutTypeOptions }) => {
         {" "}
         <label htmlFor='duration'>Duration in min</label>
         <input {...register("duration", { required: true })} />
-        {/* errors will return when field validation fails  */}
         {errors.duration && <span>This field is required</span>}
       </div>
 
