@@ -19,6 +19,7 @@ function App() {
     },
   ]);
 
+  // fetching and setting workout types
   const fetchTypes = async () => {
     const types = await getWorkoutTypes();
     setWorkoutTypes(types);
@@ -37,11 +38,11 @@ function App() {
     setWorkoutTypeOptions(typeOptions);
   }, [workoutTypes]);
 
+  // fetching and setting workout sessions data (total, individual sessions)
   const fetchSessions = async () => {
     const sessions = await getWorkoutSessions({
       week: weekStart.toISOString().split("T")[0],
     });
-    console.log(sessions);
 
     setWorkoutSessionsData(sessions);
   };

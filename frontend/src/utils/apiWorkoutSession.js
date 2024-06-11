@@ -13,6 +13,6 @@ export const getWorkoutSessions = async (params) => {
 
 export const createWorkoutSession = async (sessionData) => {
   const data = await axios.post(`${baseUrl}/workout-session`, sessionData);
-  console.log(data);
+
   return data.data;
 };
