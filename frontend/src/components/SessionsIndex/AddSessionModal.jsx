@@ -1,7 +1,7 @@
 import Modal from "@mui/material/Modal";
 import "../../styles/components/SessionsIndex/AddSessionModal.scss";
 
-const AddSessionModal = ({ id = null, open, handleClose, children }) => {
+const AddSessionModal = ({ id, open, handleClose, children }) => {
   return (
     <Modal
       id={id}

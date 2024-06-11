@@ -1,5 +1,12 @@
 @import "../../mixins";
 
+#add-session-form {
+  #close-modal-btn {
+    background-color: transparent;
+    border: none;
+  }
+}
+
 .add-session-btn {
   display: flex;
   justify-content: center;

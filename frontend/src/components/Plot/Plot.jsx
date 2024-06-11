@@ -1,4 +1,3 @@
-import { getWorkoutTypes } from "../../utils/apiWorkoutType";
 import { getWorkoutSessions } from "../../utils/apiWorkoutSession";
 import { useState, useEffect } from "react";
 import { BarChart, barElementClasses } from "@mui/x-charts/BarChart";
@@ -7,22 +6,9 @@ import SelectMenu from "../Shared Components/Select";
 import Card from "../Shared Components/Card";
 import "../../styles/components/Plot/_Plot.scss";
 
-const PlotSection = ({ weekStart, workoutTypes }) => {
+const PlotSection = ({ weekStart, workoutTypeOptions }) => {
   const [selected, setSelected] = useState("");
-  const [workoutTypeOptions, setWorkoutTypeOptions] = useState([
-    {
-      value: "",
-      label: "",
-    },
-  ]);
   const [plotData, setPlotData] = useState([]);
-
-  const fetchTypes = async () => {
-    const types = await getWorkoutTypes();
-    const options = types.map((t) => ({ value: t.id, label: t.name }));
-
-    setWorkoutTypeOptions([{ value: "", label: "all" }, ...options]);
-  };
 
   const fetchSessions = async () => {
     const sessions = await getWorkoutSessions({
@@ -34,12 +20,6 @@ const PlotSection = ({ weekStart, workoutTypes }) => {
 
     setPlotData(totalWorkoutDurationPerWeekday);
   };
-
-  useEffect(() => {
-    const typeOptions = workoutTypes.map((t) => ({ value: t.id, label: t.name }));
-    setWorkoutTypeOptions([{ value: "", label: "all" }, ...typeOptions]);
-    fetchTypes();
-  }, [selected, weekStart]);
 
   useEffect(() => {
     fetchSessions();

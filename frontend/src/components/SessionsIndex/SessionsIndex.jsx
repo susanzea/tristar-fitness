@@ -3,9 +3,10 @@ import { useEffect, useState } from "react";
 import { getWorkoutSessions } from "../../utils/apiWorkoutSession";
 import { formatDate, convertMinsToHours, getDay } from "../../utils/helpers";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import { faPlus, faXmark } from "@fortawesome/free-solid-svg-icons";
 import Card from "../Shared Components/Card";
 import AddSessionModal from "./AddSessionModal";
+import Form from "./Form";
 import "../../styles/components/SessionsIndex/_SessionsIndex.scss";
 
 const SessionsIndex = ({ weekStart, workoutTypes }) => {
@@ -27,11 +28,19 @@ const SessionsIndex = ({ weekStart, workoutTypes }) => {
   return (
     <>
       <AddSessionModal
-        id={'add-session-modal'}
+        id={"add-session-modal"}
         open={isModalOpen}
         handleClose={() => setIsModalOpen(false)}>
         <Card>
-          <div className='add-session-form'>hi</div>
+          <div id='add-session-form'>
+            <button id='close-modal-btn' onClick={() => setIsModalOpen(false)}>
+              <FontAwesomeIcon
+                icon={faXmark}
+                style={{ color: "#ffffff", height: "30px" }}
+              />
+            </button>
+            <Form />
+          </div>
         </Card>
       </AddSessionModal>
       <Card className={"sessions-section"} style={{ position: "relative" }}>

@@ -1,5 +1,15 @@
+@import "../../colors";
+
 #add-session-modal {
-    .card {
-        background-color: pink;
-    }
+  display: flex;
+  justify-content: center;
+  align-content: center;
+
+  .card {
+    background-color: $black;
+    border: 2px solid $soft-black;
+    width: fit-content;
+    height: fit-content;
+    margin-top: 75px;
+  }
 }

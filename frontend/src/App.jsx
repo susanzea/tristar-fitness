@@ -10,23 +10,39 @@ import "./styles/_base.scss";
 function App() {
   const [weekStart, setWeekStart] = useState(getWeekday(0));
   const [workoutTypes, setWorkoutTypes] = useState([]);
+  const [workoutTypeOptions, setWorkoutTypeOptions] = useState([
+    {
+      value: "",
+      label: "",
+    },
+  ]);
 
+  const fetchTypes = async () => {
+    const types = await getWorkoutTypes();
+    setWorkoutTypes(types);
+  };
 
-   const fetchTypes = async () => {
-     const types = await getWorkoutTypes();
-     setWorkoutTypes(types);
-   };
+  useEffect(() => {
+    fetchTypes();
+  }, []);
 
-   useEffect(() => {
-     fetchTypes();
-   }, []);
+  useEffect(() => {
+    const typeOptions = workoutTypes.map((t) => ({
+      value: t.id,
+      label: t.name,
+    }));
+    setWorkoutTypeOptions([{ value: "", label: "all" }, ...typeOptions]);
+  }, [workoutTypes]);
 
   return (
     <div className='page cabin'>
       <Navbar weekStart={weekStart} setWeekStart={setWeekStart} />
       <div className='content-container'>
         <SessionsIndex weekStart={weekStart} workoutTypes={workoutTypes} />
-        <PlotSection weekStart={weekStart} workoutTypes={workoutTypes} />
+        <PlotSection
+          weekStart={weekStart}
+          workoutTypeOptions={workoutTypeOptions}
+        />
       </div>
     </div>
   );
