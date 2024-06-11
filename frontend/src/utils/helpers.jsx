@@ -10,6 +10,22 @@ export const formatDate = (dt) => {
   return dt.toDateString().split(" ").slice(1).join(" ");
 };
 
+export const getDay = (dateObj) => {
+  const idx = dateObj.getDay();
+
+  const weekdaysByIdx = {
+    0: "Sunday",
+    1: "Monday",
+    2: "Tuesday",
+    3: "Wednesday",
+    4: "Thursday",
+    5: "Friday",
+    6: "Saturday",
+  };
+
+  return weekdaysByIdx[idx];
+};
+
 export const addOrSubWeek = (dateObj, op) => {
   const copy = new Date(dateObj);
   copy.setDate(op === "-" ? copy.getDate() - 7 : copy.getDate() + 7);

@@ -1,8 +1,9 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { useEffect, useState } from "react";
 import { getWorkoutSessions } from "../../utils/apiWorkoutSession";
-import { formatDate, convertMinsToHours } from "../../utils/helpers";
+import { formatDate, convertMinsToHours, getDay } from "../../utils/helpers";
 import Card from "../Shared Components/Card";
+import "../../styles/components/SessionsIndex/_SessionsIndex.scss";
 
 const SessionsIndex = ({ weekStart, workoutTypes }) => {
   const [sessions, setSessions] = useState([]);
@@ -31,15 +32,20 @@ const SessionsIndex = ({ weekStart, workoutTypes }) => {
 };
 
 const Row = ({ session, workoutTypes }) => {
-  debugger;
-
   return (
     <div className='session-row'>
-      <div>{formatDate(new Date(session.workout_date))}</div>
-      <div className='workout-type'>
-        {workoutTypes.filter((t) => t.id == session.workout_type_id)[0]?.name}
+      <div className='left'>
+        <div className='workout-type'>
+          {getDay(new Date(session.workout_date))}{" "}
+          {workoutTypes.filter((t) => t.id == session.workout_type_id)[0]?.name}
+        </div>
       </div>
-      <div>{convertMinsToHours(session.duration_min)}</div>
+      <div className='right'>
+        <div>{formatDate(new Date(session.workout_date))}</div>
+        <div className='duration'>
+          {convertMinsToHours(session.duration_min)}
+        </div>
+      </div>
     </div>
   );
 };
