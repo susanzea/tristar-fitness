@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAnglesLeft, faAnglesRight } from "@fortawesome/free-solid-svg-icons";
-import { getWeekday, formatDate, addOrSubWeek } from "../../utils";
+import { getWeekday, formatDate, addOrSubWeek } from "../../utils/helpers";
 import "../../styles/components/Navbar/_WeekNavigator.scss";
 
 const WeekNavigator = ({ weekStart, setWeekStart }) => {

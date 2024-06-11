@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { getWeekday } from "./utils";
+import { getWeekday } from "./utils/helpers";
 import Navbar from "./components/Navbar/Navbar";
 import PlotSection from "./components/Plot/Plot";
 import "./styles/style.scss";
