@@ -3,6 +3,7 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
+import "../../styles/components/Shared Components/_Select.scss";
 
 const SelectMenu = ({
   selected,
@@ -11,6 +12,7 @@ const SelectMenu = ({
   label = "select",
   options,
   variant = "filled",
+  register={}
 }) => {
   const handleChange = (event) => {
     setSelected(event.target.value);
@@ -26,6 +28,7 @@ const SelectMenu = ({
           value={selected}
           onChange={handleChange}
           label={label}
+          {...register}
           inputProps={{
             MenuProps: {
               MenuListProps: {

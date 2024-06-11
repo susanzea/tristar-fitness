@@ -33,6 +33,10 @@ export const addOrSubWeek = (dateObj, op) => {
   return copy;
 };
 
+// export const datepickerDateFormatter = (dateObj) => {
+
+// }
+
 export const paramsGenerator = (paramObj) => {
   const params = [];
   for (const paramPair in paramObj) {

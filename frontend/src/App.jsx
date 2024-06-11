@@ -31,17 +31,24 @@ function App() {
       value: t.id,
       label: t.name,
     }));
-    setWorkoutTypeOptions([{ value: "", label: "all" }, ...typeOptions]);
+    setWorkoutTypeOptions(typeOptions);
   }, [workoutTypes]);
 
   return (
     <div className='page cabin'>
       <Navbar weekStart={weekStart} setWeekStart={setWeekStart} />
       <div className='content-container'>
-        <SessionsIndex weekStart={weekStart} workoutTypes={workoutTypes} />
+        <SessionsIndex
+          weekStart={weekStart}
+          workoutTypes={workoutTypes}
+          workoutTypeOptions={workoutTypeOptions}
+        />
         <PlotSection
           weekStart={weekStart}
-          workoutTypeOptions={workoutTypeOptions}
+          workoutTypeOptions={[
+            { value: "", label: "all" },
+            ...workoutTypeOptions,
+          ]}
         />
       </div>
     </div>

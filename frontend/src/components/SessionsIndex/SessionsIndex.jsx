@@ -9,7 +9,7 @@ import AddSessionModal from "./AddSessionModal";
 import Form from "./Form";
 import "../../styles/components/SessionsIndex/_SessionsIndex.scss";
 
-const SessionsIndex = ({ weekStart, workoutTypes }) => {
+const SessionsIndex = ({ weekStart, workoutTypes, workoutTypeOptions }) => {
   const [sessions, setSessions] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -39,7 +39,7 @@ const SessionsIndex = ({ weekStart, workoutTypes }) => {
                 style={{ color: "#ffffff", height: "30px" }}
               />
             </button>
-            <Form />
+            <Form workoutTypeOptions={workoutTypeOptions} />
           </div>
         </Card>
       </AddSessionModal>

@@ -2,17 +2,4 @@
   display: flex;
   flex-direction: column;
   width: 100%;
-
-  .select-menu {
-    display: flex;
-    justify-content: end;
-
-    label {
-      color: white;
-    }
-
-    .MuiSelect-select {
-      color: white;
-    }
-  }
 }
