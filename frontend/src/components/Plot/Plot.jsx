@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { getWorkoutTypes } from "../../utils/apiWorkoutType";
 import { getWorkoutSessions } from "../../utils/apiWorkoutSession";
 import { useState, useEffect } from "react";
@@ -8,7 +7,6 @@ import SelectMenu from "../Shared Components/Select";
 import Card from "../Shared Components/Card";
 import "../../styles/components/Plot/_Plot.scss";
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const PlotSection = ({ weekStart }) => {
   const [selected, setSelected] = useState("");
   const [workoutTypeOptions, setWorkoutTypeOptions] = useState([
@@ -27,8 +25,6 @@ const PlotSection = ({ weekStart }) => {
   };
 
   const fetchSessions = async () => {
-    console.log("starting fetching");
-    debugger;
     const sessions = await getWorkoutSessions({
       week: weekStart.toISOString().split("T")[0],
       type: selected,

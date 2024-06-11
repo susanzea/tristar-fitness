@@ -13,8 +13,6 @@ const SelectMenu = ({
   variant = "filled",
 }) => {
   const handleChange = (event) => {
-    console.log(event.target.value);
-    debugger;
     setSelected(event.target.value);
   };
 
