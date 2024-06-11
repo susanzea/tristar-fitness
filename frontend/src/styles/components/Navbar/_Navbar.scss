@@ -11,6 +11,7 @@
   background-color: $soft-black;
   width: 100vw;
   height: 75px;
+  z-index: 1000;
 
   .logo {
     display: flex;

@@ -2,6 +2,8 @@
 import { useEffect, useState } from "react";
 import { getWorkoutSessions } from "../../utils/apiWorkoutSession";
 import { formatDate, convertMinsToHours, getDay } from "../../utils/helpers";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import Card from "../Shared Components/Card";
 import "../../styles/components/SessionsIndex/_SessionsIndex.scss";
 
@@ -21,7 +23,14 @@ const SessionsIndex = ({ weekStart, workoutTypes }) => {
   }, [weekStart]);
 
   return (
-    <Card>
+    <Card style={{ position: "relative" }}>
+      <button className='add-session-btn'>
+        <FontAwesomeIcon
+          icon={faPlus}
+          style={{ color: "#ffffff", height: "50%" }}
+        />
+        <span>&nbsp;&nbsp;Add workout</span>
+      </button>
       <div className='sessions-index-container'>
         {sessions.map((s, i) => {
           return <Row key={i} session={s} workoutTypes={workoutTypes} />;
