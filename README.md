@@ -16,6 +16,7 @@ Fullstack app submission for Jr. Fullstack role.
 * Python
 * Flask
 * SQLAlchemy
+* PostgreSQL
 * SASS
 * FontAwesome
 * Mui tables
