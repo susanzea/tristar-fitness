@@ -53,7 +53,6 @@ const SessionsIndex = ({
         </button>
         <div className='sessions-index-container'>
           {workoutSessionsData?.workout_sessions.map((s, i) => {
-            console.log(s);
             return <Row key={i} session={s} workoutTypes={workoutTypes} />;
           })}
         </div>

@@ -26,7 +26,6 @@ function App() {
   };
 
   useEffect(() => {
-    console.log("fetching types");
     fetchTypes();
   }, []);
 
@@ -48,7 +47,6 @@ function App() {
   };
 
   useEffect(() => {
-    console.log("fetching session");
     fetchSessions();
   }, []);
 
