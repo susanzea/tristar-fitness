@@ -1,9 +1,10 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { useEffect, useState } from "react";
 import { getWorkoutSessions } from "../../utils/apiWorkoutSession";
+import { formatDate, convertMinsToHours } from "../../utils/helpers";
 import Card from "../Shared Components/Card";
 
-const SessionsIndex = ({ weekStart }) => {
+const SessionsIndex = ({ weekStart, workoutTypes }) => {
   const [sessions, setSessions] = useState([]);
 
   const fetchSessions = async () => {
@@ -11,29 +12,36 @@ const SessionsIndex = ({ weekStart }) => {
       week: weekStart.toISOString().split("T")[0],
     });
 
-    console.log(sessions.workout_sessions);
     setSessions(sessions.workout_sessions);
   };
 
   useEffect(() => {
     fetchSessions();
-  }, []);
+  }, [weekStart]);
 
-  debugger;
   return (
     <Card>
       <div className='sessions-index-container'>
         {sessions.map((s, i) => {
-          debugger;
-          return <Row key={i} session={s} />;
+          return <Row key={i} session={s} workoutTypes={workoutTypes} />;
         })}
       </div>
     </Card>
   );
 };
 
-const Row = ({ session }) => {
-  return <div>{session.workout_date.toLocaleString()}</div>;
+const Row = ({ session, workoutTypes }) => {
+  debugger;
+
+  return (
+    <div className='session-row'>
+      <div>{formatDate(new Date(session.workout_date))}</div>
+      <div className='workout-type'>
+        {workoutTypes.filter((t) => t.id == session.workout_type_id)[0]?.name}
+      </div>
+      <div>{convertMinsToHours(session.duration_min)}</div>
+    </div>
+  );
 };
 
 export default SessionsIndex;

@@ -7,7 +7,7 @@ import SelectMenu from "../Shared Components/Select";
 import Card from "../Shared Components/Card";
 import "../../styles/components/Plot/_Plot.scss";
 
-const PlotSection = ({ weekStart }) => {
+const PlotSection = ({ weekStart, workoutTypes }) => {
   const [selected, setSelected] = useState("");
   const [workoutTypeOptions, setWorkoutTypeOptions] = useState([
     {
@@ -36,6 +36,8 @@ const PlotSection = ({ weekStart }) => {
   };
 
   useEffect(() => {
+    const typeOptions = workoutTypes.map((t) => ({ value: t.id, label: t.name }));
+    setWorkoutTypeOptions([{ value: "", label: "all" }, ...typeOptions]);
     fetchTypes();
   }, [selected, weekStart]);
 
