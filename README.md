@@ -1,5 +1,7 @@
 # Tristar Fitness
 Fullstack app submission for Jr. Fullstack role.
+* run the FE using 'npm run dev'
+* run the BE using 'flask run'
 <br />
 <br />
 
