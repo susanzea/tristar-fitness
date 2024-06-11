@@ -1,4 +1,6 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { useForm } from "react-hook-form";
+import { createWorkoutSession } from "../../utils/apiWorkoutSession";
 import "../../styles/components/SessionsIndex/_Form.scss";
 
 const Form = ({ workoutTypeOptions }) => {
@@ -7,7 +9,10 @@ const Form = ({ workoutTypeOptions }) => {
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const onSubmit = (data) => console.log(data);
+  const onSubmit = (data) => {
+    console.log(data)
+    createWorkoutSession({workout_type_id: data.workout, duration_min: data.duration, workout_date: data.date })
+  };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
