@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { getWorkoutTypes } from "../../utils/apiWorkoutType";
+import { getWorkoutSessions } from "../../utils/apiWorkoutSession";
 import { useState, useEffect } from "react";
 import { BarChart, barElementClasses } from "@mui/x-charts/BarChart";
 import { axisClasses } from "@mui/x-charts/ChartsAxis";
@@ -18,12 +19,24 @@ const PlotSection = ({ weekStart }) => {
   const [plotData, setPlotData] = useState([]);
 
   const fetchTypes = async () => {
-    console.log("starting fetching");
     const types = await getWorkoutTypes();
     const options = types.map((t) => ({ value: t.id, label: t.name }));
 
-    console.log(options);
     setWorkoutTypeOptions([{ value: "", label: "all" }, ...options]);
+  };
+
+  const fetchSessions = async () => {
+    console.log("starting fetching");
+    debugger;
+    const sessions = await getWorkoutSessions({
+      week: weekStart.toISOString().split("T")[0],
+      type: "golfing",
+      duration: true,
+    });
+    debugger;
+    const totalWorkoutDurationPerWeekday = Object.values(sessions);
+
+    setPlotData(totalWorkoutDurationPerWeekday);
   };
 
   useEffect(() => {
@@ -31,18 +44,8 @@ const PlotSection = ({ weekStart }) => {
   }, []);
 
   useEffect(() => {
-    const totalWorkoutDurationPerWeekday = Object.values({
-      "2024-06-02 00:00:00": 0,
-      "2024-06-03 00:00:00": 0,
-      "2024-06-04 00:00:00": 0,
-      "2024-06-05 00:00:00": 0,
-      "2024-06-06 00:00:00": 0,
-      "2024-06-07 00:00:00": 40,
-      "2024-06-08 00:00:00": 0,
-    });
-
-    setPlotData(totalWorkoutDurationPerWeekday);
-  }, [weekStart]);
+    fetchSessions();
+  }, []);
 
   return (
     <Card>

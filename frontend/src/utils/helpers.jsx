@@ -16,3 +16,13 @@ export const addOrSubWeek = (dateObj, op) => {
   
   return copy;
 };
+
+export const paramsGenerator = (paramObj) => {
+  const params = [];
+  for (const paramPair in paramObj) {
+    const value = paramObj[paramPair];
+    params.push(`${paramPair}=${value}`)
+  }
+
+  return params.join('&');
+}

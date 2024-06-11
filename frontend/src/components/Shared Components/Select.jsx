@@ -11,10 +11,8 @@ const SelectMenu = ({
   variant = "filled",
 }) => {
   const [selected, setSelected] = React.useState(options[0].value);
-  console.log(`selected: ${selected}`);
 
   const handleChange = (event) => {
-    console.log(`val: ${event.target.value}`);
     setSelected(event.target.value);
   };
 

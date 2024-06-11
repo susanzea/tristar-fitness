@@ -12,7 +12,7 @@ function App() {
     <div className='page cabin'>
       <Navbar weekStart={weekStart} setWeekStart={setWeekStart} />
       <div className='content-container'>
-        <PlotSection />
+        <PlotSection weekStart={weekStart} />
       </div>
     </div>
   );
