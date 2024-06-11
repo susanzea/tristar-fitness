@@ -10,6 +10,7 @@ import "../../styles/components/Plot/_Plot.scss";
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const PlotSection = ({ weekStart }) => {
+  const [selected, setSelected] = useState("");
   const [workoutTypeOptions, setWorkoutTypeOptions] = useState([
     {
       value: "",
@@ -30,10 +31,9 @@ const PlotSection = ({ weekStart }) => {
     debugger;
     const sessions = await getWorkoutSessions({
       week: weekStart.toISOString().split("T")[0],
-      type: "golfing",
+      type: selected,
       duration: true,
     });
-    debugger;
     const totalWorkoutDurationPerWeekday = Object.values(sessions);
 
     setPlotData(totalWorkoutDurationPerWeekday);
@@ -41,17 +41,22 @@ const PlotSection = ({ weekStart }) => {
 
   useEffect(() => {
     fetchTypes();
-  }, []);
+  }, [selected]);
 
   useEffect(() => {
     fetchSessions();
-  }, []);
+  }, [selected]);
 
   return (
     <Card>
       <div id='plot-container'>
         <div>
-          <SelectMenu options={workoutTypeOptions} />
+          <SelectMenu
+          label='workout'
+            options={workoutTypeOptions}
+            selected={workoutTypeOptions[0].value}
+            setSelected={setSelected}
+          />
         </div>
         <BarChart
           series={[{ data: plotData, color: "#3245e5" }]}

@@ -5,14 +5,16 @@ import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 
 const SelectMenu = ({
+  selected,
+  setSelected,
   className = "select-menu",
   label = "select",
   options,
   variant = "filled",
 }) => {
-  const [selected, setSelected] = React.useState(options[0].value);
-
   const handleChange = (event) => {
+    console.log(event.target.value);
+    debugger;
     setSelected(event.target.value);
   };
 
