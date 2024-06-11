@@ -118,7 +118,6 @@ def get_workout_sessions():
     
     # if type param exists, filter for only sessions of that type
     if (type):
-        # workout_type_id = WorkoutType.query.filter(WorkoutType.name==type).first().id
         query = query.filter(WorkoutSession.workout_type_id == type)
 
     sessions = query.order_by(WorkoutSession.workout_date.asc()).all()

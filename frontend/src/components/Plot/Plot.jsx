@@ -37,18 +37,18 @@ const PlotSection = ({ weekStart }) => {
 
   useEffect(() => {
     fetchTypes();
-  }, [selected]);
+  }, [selected, weekStart]);
 
   useEffect(() => {
     fetchSessions();
-  }, [selected]);
+  }, [selected, weekStart]);
 
   return (
     <Card>
       <div id='plot-container'>
         <div>
           <SelectMenu
-          label='workout'
+            label='workout'
             options={workoutTypeOptions}
             selected={workoutTypeOptions[0].value}
             setSelected={setSelected}
