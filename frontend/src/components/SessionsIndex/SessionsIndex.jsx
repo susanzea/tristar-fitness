@@ -5,10 +5,12 @@ import { formatDate, convertMinsToHours, getDay } from "../../utils/helpers";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import Card from "../Shared Components/Card";
+import AddSessionModal from "./AddSessionModal";
 import "../../styles/components/SessionsIndex/_SessionsIndex.scss";
 
 const SessionsIndex = ({ weekStart, workoutTypes }) => {
   const [sessions, setSessions] = useState([]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const fetchSessions = async () => {
     const sessions = await getWorkoutSessions({
@@ -23,20 +25,32 @@ const SessionsIndex = ({ weekStart, workoutTypes }) => {
   }, [weekStart]);
 
   return (
-    <Card style={{ position: "relative" }}>
-      <button className='add-session-btn'>
-        <FontAwesomeIcon
-          icon={faPlus}
-          style={{ color: "#ffffff", height: "50%" }}
-        />
-        <span>&nbsp;&nbsp;Add workout</span>
-      </button>
-      <div className='sessions-index-container'>
-        {sessions.map((s, i) => {
-          return <Row key={i} session={s} workoutTypes={workoutTypes} />;
-        })}
-      </div>
-    </Card>
+    <>
+      <AddSessionModal
+        id={'add-session-modal'}
+        open={isModalOpen}
+        handleClose={() => setIsModalOpen(false)}>
+        <Card>
+          <div className='add-session-form'>hi</div>
+        </Card>
+      </AddSessionModal>
+      <Card className={"sessions-section"} style={{ position: "relative" }}>
+        <button
+          className='add-session-btn'
+          onClick={() => setIsModalOpen(true)}>
+          <FontAwesomeIcon
+            icon={faPlus}
+            style={{ color: "#ffffff", height: "50%" }}
+          />
+          <span>&nbsp;&nbsp;Add workout</span>
+        </button>
+        <div className='sessions-index-container'>
+          {sessions.map((s, i) => {
+            return <Row key={i} session={s} workoutTypes={workoutTypes} />;
+          })}
+        </div>
+      </Card>
+    </>
   );
 };
 
