@@ -139,7 +139,9 @@ def get_workout_sessions():
         for session in sessions:
             workout_duration_by_weekday[str(session.workout_date)] = workout_duration_by_weekday[str(session.workout_date)] + session.duration_min
 
-        return workout_duration_by_weekday
+        total_min = sum(workout_duration_by_weekday.values())
+
+        return {'duration_min_by_date': workout_duration_by_weekday, 'week_total_duration_min': total_min}
     else:
         return {'workout_sessions': sessions_list, 'total': len(sessions_list)}
 

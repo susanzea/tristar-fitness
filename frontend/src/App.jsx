@@ -14,6 +14,8 @@ function App() {
   const [totalWorkoutSessions, setTotalWorkoutSessions] = useState(null);
   const [workoutSessions, setWorkoutSessions] = useState(null);
   const [workoutTypes, setWorkoutTypes] = useState([]);
+  const [workoutDurationByDay, setWorkoutDurationByDay] = useState([]);
+  const [workoutDurationWeekTotal, setWorkoutDurationWeekTotal] = useState(0);
   const [workoutTypeOptions, setWorkoutTypeOptions] = useState([
     {
       value: "",
@@ -42,13 +44,21 @@ function App() {
 
   // fetching and setting workout sessions data (total, individual sessions)
   const fetchSessions = async () => {
-    console.log('fetching sessions');
+    console.log("fetching sessions");
     const sessions = await getWorkoutSessions({
       week: weekStart.toISOString().split("T")[0],
     });
 
+    const durationData = await getWorkoutSessions({
+      week: weekStart.toISOString().split("T")[0],
+      duration: true,
+    });
+
     setTotalWorkoutSessions(sessions.total);
     setWorkoutSessions(sessions.workout_sessions);
+    setWorkoutDurationByDay(durationData.duration_min_by_date);
+    setWorkoutDurationByDay(durationData.duration_min_by_date);
+    setWorkoutDurationWeekTotal(durationData.week_total_duration_min);
   };
 
   useEffect(() => {
@@ -68,8 +78,14 @@ function App() {
                 width: "100%",
                 border: "1px solid red",
               }}>
-              <MetricTile metric={totalWorkoutSessions} description={'total workouts'} />
-              <MetricTile />
+              <MetricTile
+                metric={totalWorkoutSessions}
+                description={"total workouts"}
+              />
+              <MetricTile
+                metric={workoutDurationWeekTotal}
+                description={"time spent"}
+              />
             </div>
             <SessionsSection
               weekStart={weekStart}

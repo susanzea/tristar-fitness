@@ -11,7 +11,7 @@ const MetricTile = ({ metric='none', description='no descr' }) => {
           {" "}
           <FontAwesomeIcon
             icon={faPlus}
-            style={{ color: "#ffffff", height: "80px", width: "80px" }}
+            style={{ color: "#ffffff", height: "50px", width: "50px" }}
           />
         </div>
         <div className='text'>
