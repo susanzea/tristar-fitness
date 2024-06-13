@@ -1,28 +1,28 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlus } from "@fortawesome/free-solid-svg-icons";
+// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+// import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { formatDate, convertMinsToHours, getDay } from "../../utils/helpers";
-import Card from "../Shared Components/Card";
+// import Card from "../Shared Components/Card";
 
 const SessionsIndex = ({
   workoutTypes,
   workoutSessionsData,
-  setIsModalOpen,
+//   setIsModalOpen,
 }) => {
   return (
-    <Card className={"sessions-section"} style={{ position: "relative" }}>
-      <button className='add-session-btn' onClick={() => setIsModalOpen(true)}>
-        <FontAwesomeIcon
-          icon={faPlus}
-          style={{ color: "#ffffff", height: "50%" }}
-        />
-        <span>&nbsp;&nbsp;Add workout</span>
-      </button>
-      <div className='sessions-index-container'>
-        {workoutSessionsData?.workout_sessions.map((s, i) => {
-          return <Row key={i} session={s} workoutTypes={workoutTypes} />;
-        })}
-      </div>
-    </Card>
+    // <Card className={"sessions-section"} style={{ position: "relative" }}>
+    //   <button className='add-session-btn' onClick={() => setIsModalOpen(true)}>
+    //     <FontAwesomeIcon
+    //       icon={faPlus}
+    //       style={{ color: "#ffffff", height: "50%" }}
+    //     />
+    //     <span>&nbsp;&nbsp;Add workout</span>
+    //   </button>
+    <div className='sessions-index-container'>
+      {workoutSessionsData?.workout_sessions.map((s, i) => {
+        return <Row key={i} session={s} workoutTypes={workoutTypes} />;
+      })}
+    </div>
+    // </Card>
   );
 };
 
