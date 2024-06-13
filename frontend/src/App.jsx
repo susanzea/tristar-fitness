@@ -11,7 +11,8 @@ import "./styles/_base.scss";
 
 function App() {
   const [weekStart, setWeekStart] = useState(getWeekday(0));
-  const [workoutSessionsData, setWorkoutSessionsData] = useState(null);
+  const [totalWorkoutSessions, setTotalWorkoutSessions] = useState(null);
+  const [workoutSessions, setWorkoutSessions] = useState(null);
   const [workoutTypes, setWorkoutTypes] = useState([]);
   const [workoutTypeOptions, setWorkoutTypeOptions] = useState([
     {
@@ -46,7 +47,8 @@ function App() {
       week: weekStart.toISOString().split("T")[0],
     });
 
-    setWorkoutSessionsData(sessions);
+    setTotalWorkoutSessions(sessions.total);
+    setWorkoutSessions(sessions.workout_sessions);
   };
 
   useEffect(() => {
@@ -57,7 +59,7 @@ function App() {
     <div className='page cabin'>
       <Navbar weekStart={weekStart} setWeekStart={setWeekStart} />
       <div className='content-container'>
-        {workoutSessionsData && (
+        {workoutSessions && (
           <>
             <div
               id='tiles-section'
@@ -66,7 +68,7 @@ function App() {
                 width: "100%",
                 border: "1px solid red",
               }}>
-              <MetricTile metric={workoutSessionsData.total} description={'total workouts'} />
+              <MetricTile metric={totalWorkoutSessions} description={'total workouts'} />
               <MetricTile />
             </div>
             <SessionsSection
@@ -74,7 +76,7 @@ function App() {
               workoutTypes={workoutTypes}
               workoutTypeOptions={workoutTypeOptions}
               fetchSessions={fetchSessions}
-              workoutSessionsData={workoutSessionsData}
+              workoutSessions={workoutSessions}
             />
           </>
         )}
@@ -84,6 +86,7 @@ function App() {
             { value: "", label: "all" },
             ...workoutTypeOptions,
           ]}
+          fetchSessions={fetchSessions}
         />
       </div>
     </div>

@@ -1,34 +1,21 @@
-// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-// import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { useEffect } from "react";
 import { formatDate, convertMinsToHours, getDay } from "../../utils/helpers";
-// import Card from "../Shared Components/Card";
 
 const SessionsIndex = ({
   weekStart,
   workoutTypes,
-  workoutSessionsData,
-  //   setIsModalOpen,
+  workoutSessions,
 }) => {
   useEffect(() => {
     console.log("hi");
   }, [weekStart]);
 
   return (
-    // <Card className={"sessions-section"} style={{ position: "relative" }}>
-    //   <button className='add-session-btn' onClick={() => setIsModalOpen(true)}>
-    //     <FontAwesomeIcon
-    //       icon={faPlus}
-    //       style={{ color: "#ffffff", height: "50%" }}
-    //     />
-    //     <span>&nbsp;&nbsp;Add workout</span>
-    //   </button>
     <div className='sessions-index-container'>
-      {workoutSessionsData?.workout_sessions.map((s, i) => {
+      {workoutSessions?.workout_sessions.map((s, i) => {
         return <Row key={i} session={s} workoutTypes={workoutTypes} />;
       })}
     </div>
-    // </Card>
   );
 };
 

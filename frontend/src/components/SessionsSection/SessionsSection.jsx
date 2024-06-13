@@ -13,7 +13,7 @@ const SessionsSection = ({
   workoutTypes,
   workoutTypeOptions,
   fetchSessions,
-  workoutSessionsData,
+  workoutSessions,
 }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -43,13 +43,8 @@ const SessionsSection = ({
           />
           <span>&nbsp;&nbsp;Add workout</span>
         </button>
-        {/* <SessionsIndex
-          weekStart={weekStart}
-          workoutTypes={workoutTypes}
-          workoutSessionsData={workoutSessionsData}
-        /> */}
         <div className='sessions-index-container'>
-          {workoutSessionsData?.workout_sessions.map((s, i) => {
+          {workoutSessions.map((s, i) => {
             return <Row key={i} session={s} workoutTypes={workoutTypes} />;
           })}
         </div>
