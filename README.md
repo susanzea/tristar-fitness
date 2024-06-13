@@ -43,11 +43,13 @@ Fullstack app submission for Jr. Fullstack role.
 
 
 ## Future Improvements/Known Bugs 👷🏻‍♀️
-* refactor React state to use context
+* refactor React component levels states to use context
 * fix 'all' option for select menu in Plot Section
 * finish styling AddWorkoutSession modal
 * add tile showing total workout sessions for week
 * add tile showing total workout time for week
+* add loading icons and skeletons
+* remove option to navigate one week in the future if dashboard is displaying the current week
 <br />
 <br />
 
