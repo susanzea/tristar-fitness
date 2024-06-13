@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form";
 import { createWorkoutSession } from "../../utils/apiWorkoutSession";
-import "../../styles/components/SessionsIndex/_Form.scss";
+import "../../styles/components/SessionsSection/_Form.scss";
 
 const Form = ({ workoutTypeOptions, fetchSessions, setIsModalOpen }) => {
   const {

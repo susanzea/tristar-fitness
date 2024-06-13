@@ -3,7 +3,7 @@ import { getWeekday } from "./utils/helpers";
 import { getWorkoutTypes } from "./utils/apiWorkoutType";
 import { getWorkoutSessions } from "./utils/apiWorkoutSession";
 import Navbar from "./components/Navbar/Navbar";
-import SessionsIndex from "./components/SessionsIndex/SessionsIndex";
+import SessionsSection from "./components/SessionsSection/SessionsSection";
 import PlotSection from "./components/Plot/Plot";
 import "./styles/style.scss";
 import "./styles/_base.scss";
@@ -55,7 +55,7 @@ function App() {
       <Navbar weekStart={weekStart} setWeekStart={setWeekStart} />
       <div className='content-container'>
         {workoutSessionsData && (
-          <SessionsIndex
+          <SessionsSection
             weekStart={weekStart}
             workoutTypes={workoutTypes}
             workoutTypeOptions={workoutTypeOptions}

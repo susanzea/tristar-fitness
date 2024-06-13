@@ -8,17 +8,17 @@ const WeekNavigator = ({ weekStart, setWeekStart }) => {
   const weekEnd = getWeekday(6, weekStart);
   const formattedWeekEndDate = formatDate(weekEnd);
 
-  const handleClick = (op) => {
+  const navWeek = (op) => {
     setWeekStart(addOrSubWeek(weekStart, op));
   };
 
   return (
     <div id='week-navigator'>
-      <button className='icon-button' onClick={() => handleClick("-")}>
+      <button className='icon-button' onClick={() => navWeek("-")}>
         <FontAwesomeIcon icon={faAnglesLeft} style={{ color: "#ffffff" }} />
       </button>
       &nbsp;{formattedWeekStartDate} - {formattedWeekEndDate}&nbsp;
-      <button className='icon-button' onClick={() => handleClick("+")}>
+      <button className='icon-button' onClick={() => navWeek("+")}>
         <FontAwesomeIcon icon={faAnglesRight} style={{ color: "#ffffff" }} />
       </button>
     </div>
