@@ -7,13 +7,13 @@ import Card from "../Shared Components/Card";
 import "../../styles/components/Plot/_Plot.scss";
 
 const PlotSection = ({ weekStart, workoutTypeOptions }) => {
-  const [selected, setSelected] = useState("");
+  const [selectedWorkoutTypeValue, setSelectedWorkoutTypeValue] = useState("");
   const [plotData, setPlotData] = useState([]);
 
   const fetchSessions = async () => {
     const sessions = await getWorkoutSessions({
       week: weekStart.toISOString().split("T")[0],
-      type: selected,
+      type: selectedWorkoutTypeValue,
       duration: true,
     });
     const totalWorkoutDurationPerWeekday = Object.values(sessions);
@@ -23,7 +23,7 @@ const PlotSection = ({ weekStart, workoutTypeOptions }) => {
 
   useEffect(() => {
     fetchSessions();
-  }, [selected, weekStart]);
+  }, [selectedWorkoutTypeValue, weekStart]);
 
   return (
     <Card>
@@ -33,7 +33,7 @@ const PlotSection = ({ weekStart, workoutTypeOptions }) => {
             label='workout'
             options={workoutTypeOptions}
             selected={workoutTypeOptions[0].value}
-            setSelected={setSelected}
+            setSelected={setSelectedWorkoutTypeValue}
           />
         </div>
         <BarChart
@@ -47,32 +47,34 @@ const PlotSection = ({ weekStart, workoutTypeOptions }) => {
           ]}
           yAxis={[{ label: "duration (min)", color: "#FFFFF" }]}
           margin={{ top: 10, bottom: 30, left: 40, right: 10 }}
-          sx={() => ({
-            [`.${barElementClasses.root}`]: {
-              strokeWidth: 2,
-            },
-            [`.${axisClasses.root}`]: {
-              [`.${axisClasses.tick}, .${axisClasses.line}`]: {
-                stroke: "#FFFFFF",
-                strokeWidth: 1,
-              },
-              [`.${axisClasses.tickLabel}`]: {
-                fill: "#FFFFFF",
-              },
-            },
-            "& .css-1k2u9zb-MuiChartsAxis-root .MuiChartsAxis-label": {
-              strokeWidth: "0.4",
-              fill: "#FFFFFF",
-            },
-            border: `1px solid rgba(${"255,255,255"}, 0.1)`,
-            backgroundImage: `linear-gradient(rgba(${"255,255,255"}, 0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(${"255,255,255"}, 0.1) 1px, transparent 1px)`,
-            backgroundSize: "35px 35px",
-            backgroundPosition: "20px 20px, 20px 20px",
-          })}
+          sx={customChartStyles()}
         />
       </div>
     </Card>
   );
 };
+
+const customChartStyles = () => ({
+  [`.${barElementClasses.root}`]: {
+    strokeWidth: 2,
+  },
+  [`.${axisClasses.root}`]: {
+    [`.${axisClasses.tick}, .${axisClasses.line}`]: {
+      stroke: "#FFFFFF",
+      strokeWidth: 1,
+    },
+    [`.${axisClasses.tickLabel}`]: {
+      fill: "#FFFFFF",
+    },
+  },
+  "& .css-1k2u9zb-MuiChartsAxis-root .MuiChartsAxis-label": {
+    strokeWidth: "0.4",
+    fill: "#FFFFFF",
+  },
+  border: `1px solid rgba(${"255,255,255"}, 0.1)`,
+  backgroundImage: `linear-gradient(rgba(${"255,255,255"}, 0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(${"255,255,255"}, 0.1) 1px, transparent 1px)`,
+  backgroundSize: "35px 35px",
+  backgroundPosition: "20px 20px, 20px 20px",
+});
 
 export default PlotSection;
