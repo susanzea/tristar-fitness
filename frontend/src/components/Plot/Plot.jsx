@@ -16,7 +16,9 @@ const PlotSection = ({ weekStart, workoutTypeOptions }) => {
       type: selectedWorkoutTypeValue,
       duration: true,
     });
-    const totalWorkoutDurationPerWeekday = Object.values(sessions);
+    const totalWorkoutDurationPerWeekday = Object.values(
+      sessions.duration_min_by_date
+    );
 
     setPlotData(totalWorkoutDurationPerWeekday);
   };
