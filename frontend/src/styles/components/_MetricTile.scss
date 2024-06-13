@@ -1,6 +1,7 @@
+@import '../colors';
+
 .tile {
   width: calc(50% - 12px);
-//   height: 200px;
   margin-bottom: 0;
 
   &:first-of-type {
@@ -15,19 +16,17 @@
     display: flex;
     flex-direction: row;
     padding-left: 30px;
-    // justify-content: center;
     width: 100%;
 
     .icon {
-        border: 1px solid yellow;
         margin-right: 20px;
+        filter: $light-gray-filter;
     }
 
     .text {
         display: flex;
         flex-direction: column;
         justify-content: center;
-        border: 1px solid blue;
     }
   }
 }

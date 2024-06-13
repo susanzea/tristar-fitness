@@ -1,7 +1,10 @@
 // colors
 $black: #000000;
 $soft-black: #181818;
-$white: #FFFFFF;
+$white: #ffffff;
 $purple: #9664fe;
 $light-blue: #63aaff;
 $dark-blue: #3245e5;
+
+//filters
+$light-gray-filter: invert(29%) sepia(0%) saturate(328%) hue-rotate(184deg) brightness(84%) contrast(85%);

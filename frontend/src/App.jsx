@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { useState, useEffect } from "react";
 import { getWeekday } from "./utils/helpers";
 import { getWorkoutTypes } from "./utils/apiWorkoutType";
@@ -57,7 +58,6 @@ function App() {
     setTotalWorkoutSessions(sessions.total);
     setWorkoutSessions(sessions.workout_sessions);
     setWorkoutDurationByDay(durationData.duration_min_by_date);
-    setWorkoutDurationByDay(durationData.duration_min_by_date);
     setWorkoutDurationWeekTotal(durationData.week_total_duration_min);
   };
 
@@ -76,13 +76,14 @@ function App() {
               style={{
                 display: "flex",
                 width: "100%",
-                border: "1px solid red",
               }}>
               <MetricTile
+                variant={"sessions"}
                 metric={totalWorkoutSessions}
                 description={"total workouts"}
               />
               <MetricTile
+                variant={"time"}
                 metric={workoutDurationWeekTotal}
                 description={"time spent"}
               />
