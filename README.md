@@ -7,6 +7,7 @@ Fullstack app submission for Jr. Fullstack role.
 
 ## Design & Development Walkthrough
 [Youtube Video](https://youtu.be/oO5q3IIiE6w)
+[React Component Mapping]([https://youtu.be/oO5q3IIiE6w](https://miro.com/app/board/uXjVK8P_l2k=/?share_link_id=453956805687))
 <br />
 <br />
 
