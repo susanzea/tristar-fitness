@@ -1,13 +1,19 @@
 // import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 // import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import { useEffect } from "react";
 import { formatDate, convertMinsToHours, getDay } from "../../utils/helpers";
 // import Card from "../Shared Components/Card";
 
 const SessionsIndex = ({
+  weekStart,
   workoutTypes,
   workoutSessionsData,
-//   setIsModalOpen,
+  //   setIsModalOpen,
 }) => {
+  useEffect(() => {
+    console.log("hi");
+  }, [weekStart]);
+
   return (
     // <Card className={"sessions-section"} style={{ position: "relative" }}>
     //   <button className='add-session-btn' onClick={() => setIsModalOpen(true)}>

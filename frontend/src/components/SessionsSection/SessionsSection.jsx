@@ -1,18 +1,29 @@
-import { useState } from "react";
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import Card from "../Shared Components/Card";
 import SessionsIndex from "./SessionsIndex";
+import { formatDate, convertMinsToHours, getDay } from "../../utils/helpers";
 import AddSessionModal from "./AddSessionModal";
 import "../../styles/components/SessionsSection/_SessionsSection.scss";
 
 const SessionsSection = ({
+  weekStart,
   workoutTypes,
   workoutTypeOptions,
   fetchSessions,
   workoutSessionsData,
 }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  useEffect(() => {
+    console.log("week updated");
+  }, [weekStart]);
+
+    useEffect(() => {
+      fetchSessions();
+    }, [weekStart]);
 
   return (
     <>
@@ -32,12 +43,37 @@ const SessionsSection = ({
           />
           <span>&nbsp;&nbsp;Add workout</span>
         </button>
-        <SessionsIndex
+        {/* <SessionsIndex
+          weekStart={weekStart}
           workoutTypes={workoutTypes}
           workoutSessionsData={workoutSessionsData}
-        />
+        /> */}
+        <div className='sessions-index-container'>
+          {workoutSessionsData?.workout_sessions.map((s, i) => {
+            return <Row key={i} session={s} workoutTypes={workoutTypes} />;
+          })}
+        </div>
       </Card>
     </>
+  );
+};
+
+const Row = ({ session, workoutTypes }) => {
+  return (
+    <div className='session-row'>
+      <div className='left'>
+        <div className='workout-type'>
+          {getDay(new Date(session.workout_date))}{" "}
+          {workoutTypes.filter((t) => t.id == session.workout_type_id)[0]?.name}
+        </div>
+      </div>
+      <div className='right'>
+        <div>{formatDate(new Date(session.workout_date))}</div>
+        <div className='duration'>
+          {convertMinsToHours(session.duration_min)}
+        </div>
+      </div>
+    </div>
   );
 };
 
