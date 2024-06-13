@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { getWeekday } from "./utils/helpers";
 import { getWorkoutTypes } from "./utils/apiWorkoutType";
 import { getWorkoutSessions } from "./utils/apiWorkoutSession";
+import MetricTile from "./components/MetricTile";
 import Navbar from "./components/Navbar/Navbar";
 import SessionsSection from "./components/SessionsSection/SessionsSection";
 import PlotSection from "./components/Plot/Plot";
@@ -55,15 +56,26 @@ function App() {
       <Navbar weekStart={weekStart} setWeekStart={setWeekStart} />
       <div className='content-container'>
         {workoutSessionsData && (
-          <SessionsSection
-            weekStart={weekStart}
-            workoutTypes={workoutTypes}
-            workoutTypeOptions={workoutTypeOptions}
-            fetchSessions={fetchSessions}
-            workoutSessionsData={workoutSessionsData}
-          />
+          <>
+            <div
+              id='tiles-section'
+              style={{
+                display: "flex",
+                width: "100%",
+                border: "1px solid red",
+              }}>
+              <MetricTile metric={workoutSessionsData.total} description={'total workouts'} />
+              <MetricTile />
+            </div>
+            <SessionsSection
+              weekStart={weekStart}
+              workoutTypes={workoutTypes}
+              workoutTypeOptions={workoutTypeOptions}
+              fetchSessions={fetchSessions}
+              workoutSessionsData={workoutSessionsData}
+            />
+          </>
         )}
-
         <PlotSection
           weekStart={weekStart}
           workoutTypeOptions={[

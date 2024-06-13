@@ -1,0 +1,25 @@
+.tile {
+  width: calc(50% - 12px);
+//   height: 200px;
+  margin-bottom: 0;
+
+  &:first-of-type {
+    margin-right: 12px;
+  }
+
+  .container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+
+    .icon {
+        border: 1px solid yellow;
+        margin-right: 20px;
+    }
+
+    .text {
+        border: 1px solid blue;
+    }
+  }
+}

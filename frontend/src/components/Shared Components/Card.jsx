@@ -1,8 +1,12 @@
 import "../../styles/components/Shared Components/_Card.scss";
 
-const Card = ({ children, style }) => {
+const Card = ({ id = null, className = null, children, style }) => {
   return (
-    <div style={style} className='card border-radius'>
+    <div
+      id={id}
+      className={`${className} card border-radius`}
+      style={style}
+    >
       {children}
     </div>
   );
